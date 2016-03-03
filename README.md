@@ -14,6 +14,13 @@ Además de los tipos básicos del lenguaje (int, float), la calculadora debe fun
 ### Objetivo
 El objetivo de esta práctica es trabajar la definición de clases, la implementación de operaciones mediante métodos, uso de funciones amigas y la sobrecarga de operadores. También se introduce las plantillas para definir clases genéricas.
 
+### Forma de uso
+```bash
+$ g++ main/main.cpp cpp/* -o main.out
+```
+```bash
+$ ./main.out
+```
 ### Autor
 
 * [Adexe Sabina Pérez](alu0100769609.github.io)
