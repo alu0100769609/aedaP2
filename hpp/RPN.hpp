@@ -9,7 +9,6 @@ class RPN {
 private:
    //Stack  //almacena valor1 y valor2
    Stack stack;
-   char op;
 public:
    RPN();
    ~RPN();

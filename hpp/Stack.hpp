@@ -10,6 +10,6 @@ public:
    void setFirst(Node* first);      //Set pointer to the first node
    Node* getFirst(void);            //Get pointer to the first element
    void setHead(TDATO element);     //Set element from head
-   void deleteFirst(void);          //Delete node from head
+   void deleteHead(void);          //Delete node from head
    void printItems(void);           //Print the stack of elements
 };

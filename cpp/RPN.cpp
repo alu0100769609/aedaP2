@@ -9,34 +9,55 @@ RPN::~RPN() {
 }
 
 void RPN::run() {
-
-   cout << "Please, enter a number or a word: ";
+   Stack* stack = new Stack();   //Creating our stack
    bool finCadena = false;
-   cin.ignore();
-do{
-   cout.flush();    // ensure output is written
-   int a = cin.peek();  // peek character
-   if (a != '\n')
-      cin >> ws;  // eat up any leading white spaces
-   int c = cin.peek();  // peek character
 
+   cin.ignore();                 //skip the enter buffered from call
+   cout << "Please, enter your expression: ";
+do{
+   cout.flush();                 // ensure output is written
+   int a = cin.peek();           // first peek just to catch \n
+   if (a != '\n')
+      cin >> ws;                 // eat up any leading white spaces (except eof by if)
+
+   int c = cin.peek();           // peek character
    if (c == '\n') {
-      cout << "FIN DE CADENA" << endl;
       finCadena = true;
+      cout << "Resultado: ";
+      stack->printItems();
    }
    else if (isdigit(c)){
-//   if (c == "+-*/") {//+ = 43; - = 45; * = 42; / = 47;
       int n;
       cin >> n;
-//      cout << "You entered the number: " << n << endl;
-      cout << "Es un número y vale: " << n << endl;
+      stack->setHead(n);
+//      cout << "Se introdujo en la pila: " << stack->getFirst()->getElement() << endl;
+//      cout << "En la pila están: ";
+//      stack->printItems();
    }
    else {
-      char str;
+      char op;
+      cin >> op;
+      int value1 = stack->getFirst()->getElement();   //get element from stack
+      stack->deleteHead();                           //remove element from stack
+      int value2 = stack->getFirst()->getElement();   //get element from stack
+      stack->deleteHead();                           //remove element from stack
+      switch (op) {
+         case '+':
+            stack->setHead(value2 + value1);
+            break;
+         case '-':
+            stack->setHead(value2 - value1);
+            break;
+         case '*':
+            stack->setHead(value2 * value1);
+            break;
+         case '/':
+            stack->setHead(value2 / value1);
+            break;
+      }
       //   if (c == "+-*/") {//+ = 43; - = 45; * = 42; / = 47;
-      cin >> str;
 //      cout << "You entered the word: " << str << endl;
-      cout << "No es un número y vale: " << str << endl;
+//      cout << "No es un número y vale: " << str << endl;
    }
 }while (!finCadena);
 }

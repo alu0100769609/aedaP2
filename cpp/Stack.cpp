@@ -32,7 +32,7 @@ void Stack::setHead(TDATO element) {
    }
 }
 
-void Stack::deleteFirst() {
+void Stack::deleteHead() {
    if (empty())
       std::cout << "Empty stack, nothing deleted" << std::endl;
    else {
@@ -46,7 +46,6 @@ void Stack::deleteFirst() {
          setFirst(aux->getNext());              //Set first = 2nd element
          delete aux;                            //Delete node (old first)
       }
-      std::cout << "Deleted" << std::endl;
    }
 }
 
