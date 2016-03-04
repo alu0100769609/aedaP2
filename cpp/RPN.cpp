@@ -23,13 +23,18 @@ do{
    int c = cin.peek();           // peek character
    if (c == '\n') {
       finCadena = true;
+//ToDo: Llamar a printItems();
       cout << "Resultado: ";
       stack->printItems();
+//FinToDo
    }
    else if (isdigit(c)){
+//ToDo: Llamar a pushItem();
       int n;
       cin >> n;
       stack->setHead(n);
+//FinToDo
+
 //      cout << "Se introdujo en la pila: " << stack->getFirst()->getElement() << endl;
 //      cout << "En la pila están: ";
 //      stack->printItems();
@@ -37,27 +42,30 @@ do{
    else {
       char op;
       cin >> op;
+//ToDo: Llamar a popItems(); que debe llamar a popItem();
       int value1 = stack->getFirst()->getElement();   //get element from stack
       stack->deleteHead();                           //remove element from stack
       int value2 = stack->getFirst()->getElement();   //get element from stack
       stack->deleteHead();                           //remove element from stack
+//FinToDo
       switch (op) {
          case '+':
+//ToDo: Llamar a addition()
             stack->setHead(value2 + value1);
             break;
          case '-':
+//ToDo: Llamar a substract()
             stack->setHead(value2 - value1);
             break;
          case '*':
+//ToDo: Llamar a multiply()
             stack->setHead(value2 * value1);
             break;
          case '/':
+//ToDo: Llamar a divide()
             stack->setHead(value2 / value1);
             break;
       }
-      //   if (c == "+-*/") {//+ = 43; - = 45; * = 42; / = 47;
-//      cout << "You entered the word: " << str << endl;
-//      cout << "No es un número y vale: " << str << endl;
    }
 }while (!finCadena);
 }
