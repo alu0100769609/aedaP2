@@ -20,17 +20,17 @@ public:                       //Access methods
    int getValue1(void);
    void setValue2(int);
    int getValue2(void);
-   void pushItem(int);        //Push into stack
-   int popItem(void);         //Pop from stack
+   void pushItem(Stack*, int);//Push into stack
+   int popItem(Stack*);         //Pop from stack
 
 private:                      //Methods that can't be called from outside the class
-   void addition(void);       //Add two numbers and push result into stack
-   void substract(void);      //Substract two numbers and push result into stack
-   void multiply(void);       //Multiply two numbers and push result into stack
-   void divide(void);         //Divide two numbers and push result into stack
+   void addition(Stack*);       //Add two numbers and push result into stack
+   void substract(Stack*);      //Substract two numbers and push result into stack
+   void multiply(Stack*);       //Multiply two numbers and push result into stack
+   void divide(Stack*);         //Divide two numbers and push result into stack
 
 public:
+   void printItems(Stack*);     //Print stack items
+   void popItems(Stack*);       //Pop 2 items and set them into value1 & value2
    void run(void);            //Run RPN calculator
-   void printItems(void);     //Print stack items
-   void popItems(void);       //Pop 2 items and set them into value1 & value2
 };
