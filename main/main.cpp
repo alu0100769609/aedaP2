@@ -9,6 +9,7 @@ int main(void) {
    int option;
 
    do {
+      system("clear");
       cout << "Reverse Polish Notation Calculator (RPN Calculator)\n"
            << "---------------------------------------------------\n" << endl;
 
