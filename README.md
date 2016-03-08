@@ -16,7 +16,7 @@ El objetivo de esta práctica es trabajar la definición de clases, la implement
 
 ### Forma de uso
 ```bash
-$ g++ main/main.cpp cpp/* -o main.out
+$ g++ main/main.cpp -o main.out
 ```
 ```bash
 $ ./main.out
