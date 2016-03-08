@@ -70,16 +70,46 @@ ostream& operator << (ostream& os, Complejo& complejo) {
 }
 
 istream& operator >>(istream& is, Complejo& complejo) {
-   char cadena[MAX_SIZE];
-//   cout << "introduce parte real: ";
-//   is >> complejo.realPart;
-//   cout << "Introduce parte imaginaria: ";
-//   is >> complejo.imaginaryPart;
+   is >> ws;                 // eat up any leading white spaces (except eof by if)
 
-   for (int i =0; i < MAX_SIZE; i++) {
-
+   int c = is.peek();           // peek character
+   if (c == '('){
+      char aux;
+      is >> aux;
+      c = is.peek();
+      if (isdigit(c)){
+         double num;
+         is >> num;
+         complejo.setRealPart(num);
+         c = is.peek();
+         if (c == ','){
+            is >> aux;
+            c = is.peek();
+            if (isdigit(c)) {
+               // double num;
+               is >> num;
+               complejo.setImaginaryPart(num);
+               c = is.peek();
+               if (c == ')') {
+                  return is;
+               }
+            }
+         }
+      }
    }
-
+   cout <<"Algo salió mal" << endl;
+/*   if (isdigit(c)){
+      TDATO item;
+      cin >> item;
+      //         cout << "El item es: " << item << endl;
+      //         cout << "Real de item: " << item.getRealPart() << endl;
+      //         cout << "Imag de item: " << item.getImaginaryPart() << endl;
+      pushItem(stack, item);
+   }
+   else {
+      char op;
+      cin >> op;
+   }
    cout << "Introduce complejo: ";
    is >> cadena;                                //is use char so save in char
    complejo.realPart = cadena[1] - '0';         //'0' = 49 in ascii
@@ -88,4 +118,5 @@ istream& operator >>(istream& is, Complejo& complejo) {
    cout << "Parte real: " << complejo.realPart << endl;
    cout << "Parte imaginaria: " << complejo.imaginaryPart << endl;
    return is;
+*/
 }

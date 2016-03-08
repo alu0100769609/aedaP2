@@ -146,6 +146,7 @@ void RPN<TDATO>::run(void) {
             TDATO item;
             cin >> item;
             pushItem(stack, -item);
+//            pushItem(stack, item);
          }
          else if ((op == '+') && isdigit(cin.peek())) {
             TDATO item;
