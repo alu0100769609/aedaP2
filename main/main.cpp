@@ -8,8 +8,8 @@ int main(void) {
    bool exitMain = false;
    int option;
 
+   system("clear");
    do {
-      system("clear");
       cout << "Reverse Polish Notation Calculator (RPN Calculator)\n"
            << "---------------------------------------------------\n" << endl;
 

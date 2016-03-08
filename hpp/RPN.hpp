@@ -66,20 +66,32 @@ public:
          else {
             char op;
             cin >> op;
-            popItems(stack);
-            switch (op) {
-               case '+':
-                  addition(stack);
-                  break;
-               case '-':
-                  substract(stack);
-                  break;
-               case '*':
-                  multiply(stack);
-                  break;
-               case '/':
-                  divide(stack);
-                  break;
+            if ((op == '-') && isdigit(cin.peek())) {   //If -3 || +4
+               TDATO item;
+               cin >> item;
+               pushItem(stack, -item);
+            }
+            else if ((op == '+') && isdigit(cin.peek())) {
+               TDATO item;
+               cin >> item;
+               pushItem(stack, item);
+            }
+            else {
+               popItems(stack);
+               switch (op) {
+                  case '+':
+                     addition(stack);
+                     break;
+                  case '-':
+                     substract(stack);
+                     break;
+                  case '*':
+                     multiply(stack);
+                     break;
+                  case '/':
+                     divide(stack);
+                     break;
+               }
             }
          }
       }while (!finCadena);
