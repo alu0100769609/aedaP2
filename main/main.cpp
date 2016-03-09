@@ -1,6 +1,7 @@
 #include <cstdlib>      //system()
 #include "../hpp/RPN.hpp"
 #include "../hpp/Complejo.hpp"
+//#include "../hpp/Rational.hpp"
 #include <iostream>
 
 using namespace std;
@@ -17,7 +18,8 @@ int main(void) {
       cout << "    0.- Exit\n"
            << "    1.- Set & evaluate int expression\n"
            << "    2.- Set & evaluate float expression\n"
-           << "    3.- Set & evaluate complex expression\n" << endl;
+           << "    3.- Set & evaluate complex expression\n"
+           << "    4.- Set & evaluate rational expression\n" << endl;
 
       cin >> option;
       system("clear");
@@ -26,13 +28,13 @@ int main(void) {
             exitMain = true;
             break;
          case 1: {
-            RPN<int>* intCalculator = new RPN<int>;
-            intCalculator->run();
+            RPN<int> intCalculator;
+            intCalculator.run();
             break;
          }
          case 2: {
-            RPN<float>* floatCalculator = new RPN<float>;
-            floatCalculator->run();
+            RPN<float> floatCalculator;
+            floatCalculator.run();
             break;
          }
          case 3: {
@@ -40,7 +42,12 @@ int main(void) {
             complexCalculator.run();
             break;
          }
-         default:
+/*         case 4: {
+            RPN<Rational> rationalCalculator;
+            rationalCalculator.run();
+            break;
+         }
+*/         default:
             cout << "Wrong choice, please try again...\n" << endl;
       }
    } while(!exitMain);
