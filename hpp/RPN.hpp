@@ -121,9 +121,9 @@ void RPN<TDATO>::run(void) {
    do{
       cout.flush();                 // ensure output is written
       int a = cin.peek();           // first peek just to catch \n
-      if (a != '\n')
+      if (a != '\n'){
          cin >> ws;                 // eat up any leading white spaces (except eof by if)
-
+      }
       int c = cin.peek();           // peek character
       if (c == '\n') {
          finCadena = true;
@@ -134,7 +134,6 @@ void RPN<TDATO>::run(void) {
       else if (isdigit(c) || c == '('){
          TDATO item;
          cin >> item;
-//         cout << "Esto hay en item: " << item << endl;
 //         cout << "El item es: " << item << endl;
 //         cout << "Real de item: " << item.getRealPart() << endl;
 //         cout << "Imag de item: " << item.getImaginaryPart() << endl;

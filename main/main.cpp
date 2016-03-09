@@ -36,8 +36,8 @@ int main(void) {
             break;
          }
          case 3: {
-            RPN<Complejo>* complexCalculator = new RPN<Complejo>;
-            complexCalculator->run();
+            RPN<Complejo> complexCalculator;
+            complexCalculator.run();
             break;
          }
          default:

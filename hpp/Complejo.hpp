@@ -2,8 +2,7 @@
 using namespace std;
 
 const int MAX_SIZE = 20;
-//typedef Complejo Complej;
-//template <class TDATO>
+
 class Complejo {
 public:
    double realPart;
@@ -19,13 +18,11 @@ public:
    double getRealPart() const;
    void setImaginaryPart(double);
    double getImaginaryPart() const;
-   Complejo& operator +(const Complejo&) const;
-   Complejo& operator -(const Complejo&) const;
-   Complejo& operator *(const Complejo&) const {};
-   Complejo& operator /(const Complejo&) const {};
-   Complejo& operator -() const;
-//   ostream& operator <<(ostream&,Complejo&);
-//   istream& operator >>(istream&,istream&);
+   Complejo operator +(const Complejo) const;
+   Complejo operator -(const Complejo) const;
+   Complejo operator *(const Complejo) const;
+   Complejo operator /(const Complejo) const;
+   Complejo operator -() const;
 };
 
 Complejo::Complejo() {
@@ -58,27 +55,35 @@ double Complejo::getImaginaryPart() const {
    return imaginaryPart;
 }
 
-Complejo& Complejo::operator +(const Complejo& c2) const {
-   return* (new Complejo(getRealPart() + c2.getRealPart(), getImaginaryPart() + c2.getImaginaryPart()));
+Complejo Complejo::operator +(const Complejo c2) const {
+   return (Complejo(getRealPart() + c2.getRealPart(), getImaginaryPart() + c2.getImaginaryPart()));
 }
 
-Complejo& Complejo::operator -(const Complejo& c2) const {
-   return* (new Complejo(getRealPart() - c2.getRealPart(), getImaginaryPart() - c2.getImaginaryPart()));
+Complejo Complejo::operator -(const Complejo c2) const {
+   return (Complejo(getRealPart() - c2.getRealPart(), getImaginaryPart() - c2.getImaginaryPart()));
 }
 
-Complejo& Complejo::operator -() const {
-   return* (new Complejo(-getRealPart(), -getImaginaryPart()));
+Complejo Complejo::operator -() const {
+   return (Complejo(-getRealPart(), -getImaginaryPart()));
+}
+
+Complejo Complejo::operator *(const Complejo c2) const {
+   return (Complejo(getRealPart() * c2.getRealPart(), getImaginaryPart() * c2.getImaginaryPart()));
+}
+
+Complejo Complejo::operator /(const Complejo c2) const {
+   return (Complejo(getRealPart() / c2.getRealPart(), getImaginaryPart() / c2.getImaginaryPart()));
 }
 
 ostream& operator << (ostream& os, const Complejo& complejo) {
-   os << "(" << complejo.getRealPart() << "," << complejo.getImaginaryPart() << ")";
+   os << "(" << complejo.getRealPart() << "+" << complejo.getImaginaryPart() << "i)";
    return os;
 }
 
 istream& operator >>(istream& is, Complejo& complejo) {
-   is >> ws;                 // eat up any leading white spaces (except eof by if)
+   is >> ws;                     // eat up any leading white spaces (except eof by if)
 
-   int c = is.peek();           // peek character
+   int c = is.peek();            // peek character
    if (c == '('){
       char aux;
       is >> aux;
@@ -92,37 +97,16 @@ istream& operator >>(istream& is, Complejo& complejo) {
             is >> aux;
             c = is.peek();
             if (isdigit(c)) {
-               // double num;
                is >> num;
                complejo.setImaginaryPart(num);
                c = is.peek();
                if (c == ')') {
+                  is >> aux;
                   return is;
                }
             }
          }
       }
    }
-   cout <<"Algo salió mal" << endl;
-/*   if (isdigit(c)){
-      TDATO item;
-      cin >> item;
-      //         cout << "El item es: " << item << endl;
-      //         cout << "Real de item: " << item.getRealPart() << endl;
-      //         cout << "Imag de item: " << item.getImaginaryPart() << endl;
-      pushItem(stack, item);
-   }
-   else {
-      char op;
-      cin >> op;
-   }
-   cout << "Introduce complejo: ";
-   is >> cadena;                                //is use char so save in char
-   complejo.realPart = cadena[1] - '0';         //'0' = 49 in ascii
-   complejo.imaginaryPart = cadena[3] - '0'; //'0' = 49 in ascii
-
-   cout << "Parte real: " << complejo.realPart << endl;
-   cout << "Parte imaginaria: " << complejo.imaginaryPart << endl;
-   return is;
-*/
+   cout <<"Oops... Something is wrong here" << endl;
 }
