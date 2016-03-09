@@ -1,106 +1,127 @@
 #include <iostream>
 using namespace std;
 
-const int MAX_SIZE = 20;
-
-class Complejo {
+class Rational {
+   friend class RPN<Rational>;         //Allow class RPN to access method operator -
 public:
-   double realPart;
-   double imaginaryPart;
-
-public:
-   Complejo();
-   Complejo(double, double);
-   ~Complejo();
+   int numerator;
+   int denominator;
 
 public:
-   void setRealPart(double);
-   double getRealPart() const;
-   void setImaginaryPart(double);
-   double getImaginaryPart() const;
-   Complejo operator +(const Complejo) const;
-   Complejo operator -(const Complejo) const;
-   Complejo operator *(const Complejo) const;
-   Complejo operator /(const Complejo) const;
-   Complejo operator -() const;
+   Rational();
+   Rational(int, int);
+   ~Rational();
+
+public:
+   void setNumerator(int);
+   int getNumerator() const;
+   void setDenominator(int);
+   int getDenominator() const;
+
+private:
+   void gcd ();
+   Rational operator +(const Rational) const;
+   Rational operator -(const Rational) const;
+   Rational operator *(const Rational) const;
+   Rational operator /(const Rational) const;
+   Rational operator -() const;
 };
 
-Complejo::Complejo() {
+Rational::Rational() {
    //By default
 }
 
-Complejo::Complejo(double realPart, double imaginaryPart) {
-   setRealPart(realPart);
-   setImaginaryPart(imaginaryPart);
+Rational::Rational(int numerator, int denominator) {
+   setNumerator(numerator);
+   setDenominator(denominator);
 }
 
-Complejo::~Complejo() {
+Rational::~Rational() {
    //By default
 }
 
-void Complejo::setRealPart(double realPart) {
-   this->realPart = realPart;
+void Rational::setNumerator(int numerator) {
+   this->numerator = numerator;
 }
 
-double Complejo::getRealPart() const {
-   return realPart;
+int Rational::getNumerator() const {
+   return numerator;
 }
 
-void Complejo::setImaginaryPart(double imaginaryPart) {
-   this->imaginaryPart = imaginaryPart;
+void Rational::setDenominator(int denominator) {
+   this->denominator = denominator;
 
 }
 
-double Complejo::getImaginaryPart() const {
-   return imaginaryPart;
+int Rational::getDenominator() const {
+   return denominator;
 }
 
-Complejo Complejo::operator +(const Complejo c2) const {
-   return (Complejo(getRealPart() + c2.getRealPart(), getImaginaryPart() + c2.getImaginaryPart()));
+void Rational::gcd () {
+   int  gcd;
+   for(int i = 1; i <= getNumerator() && i <= getDenominator(); i++)
+      if(getNumerator() % i == 0 && getDenominator() % i == 0 )
+         gcd = i;
+   setNumerator(getNumerator() / gcd);
+   setDenominator(getDenominator() / gcd);
 }
 
-Complejo Complejo::operator -(const Complejo c2) const {
-   return (Complejo(getRealPart() - c2.getRealPart(), getImaginaryPart() - c2.getImaginaryPart()));
+Rational Rational::operator +(const Rational r2) const {
+   Rational result = (Rational((getNumerator() * r2.getDenominator()) + (r2.getNumerator() * getDenominator()),
+                     getDenominator() * r2.getDenominator()));
+   result.gcd();
+   return result;
 }
 
-Complejo Complejo::operator -() const {
-   return (Complejo(-getRealPart(), -getImaginaryPart()));
+Rational Rational::operator -(const Rational r2) const {
+   Rational result = (Rational((getNumerator() * r2.getDenominator()) - (r2.getNumerator() * getDenominator()),
+                     getDenominator() * r2.getDenominator()));
+   result.gcd();
+   return result;
 }
 
-Complejo Complejo::operator *(const Complejo c2) const {
-   return (Complejo(getRealPart() * c2.getRealPart(), getImaginaryPart() * c2.getImaginaryPart()));
+Rational Rational::operator -() const {
+   return (Rational(-getNumerator(), getDenominator()));
 }
 
-Complejo Complejo::operator /(const Complejo c2) const {
-   return (Complejo(getRealPart() / c2.getRealPart(), getImaginaryPart() / c2.getImaginaryPart()));
+Rational Rational::operator *(const Rational r2) const {
+   Rational result = (Rational(getNumerator() * r2.getNumerator(), getDenominator() * r2.getDenominator()));
+   result.gcd();
+   return result;
 }
 
-ostream& operator << (ostream& os, const Complejo& complejo) {
-   os << "(" << complejo.getRealPart() << "+" << complejo.getImaginaryPart() << "i)";
+Rational Rational::operator /(const Rational r2) const {
+   Rational result = (Rational(getNumerator() * r2.getDenominator(), getDenominator() * r2.getNumerator()));
+   result.gcd();
+   return result;
+}
+
+ostream& operator << (ostream& os, const Rational& rational) {
+   os << rational.getNumerator() << "/" << rational.getDenominator();
    return os;
 }
 
-istream& operator >>(istream& is, Complejo& complejo) {
+istream& operator >>(istream& is, Rational& rational) {
    is >> ws;                     // eat up any leading white spaces (except eof by if)
 
    int c = is.peek();            // peek character
-   if (c == '('){
+   if (c == '{'){
       char aux;
       is >> aux;
       c = is.peek();
       if (isdigit(c)){
          double num;
          is >> num;
-         complejo.setRealPart(num);
+         rational.setNumerator(num);
          c = is.peek();
-         if (c == ','){
+         if (c == '/'){
             is >> aux;
             c = is.peek();
             if (isdigit(c)) {
                is >> num;
-               complejo.setImaginaryPart(num);
+               rational.setDenominator(num);
                c = is.peek();
-               if (c == ')') {
+               if (c == '}') {
                   is >> aux;
                   return is;
                }

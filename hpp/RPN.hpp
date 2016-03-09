@@ -131,7 +131,7 @@ void RPN<TDATO>::run(void) {
          printItems(stack);
          cout << endl;
       }
-      else if (isdigit(c) || c == '('){
+      else if (isdigit(c) || c == '(' || c == '{'){
          TDATO item;
          cin >> item;
 //         cout << "El item es: " << item << endl;

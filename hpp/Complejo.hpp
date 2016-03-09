@@ -1,9 +1,8 @@
 #include <iostream>
 using namespace std;
 
-const int MAX_SIZE = 20;
-
 class Complejo {
+   friend class RPN<Complejo>;         //Allow class RPN to access method operator -
 public:
    double realPart;
    double imaginaryPart;
@@ -18,6 +17,8 @@ public:
    double getRealPart() const;
    void setImaginaryPart(double);
    double getImaginaryPart() const;
+
+private:
    Complejo operator +(const Complejo) const;
    Complejo operator -(const Complejo) const;
    Complejo operator *(const Complejo) const;

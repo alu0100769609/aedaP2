@@ -1,7 +1,7 @@
 #include <cstdlib>      //system()
 #include "../hpp/RPN.hpp"
 #include "../hpp/Complejo.hpp"
-//#include "../hpp/Rational.hpp"
+#include "../hpp/Rational.hpp"
 #include <iostream>
 
 using namespace std;
@@ -42,12 +42,12 @@ int main(void) {
             complexCalculator.run();
             break;
          }
-/*         case 4: {
+         case 4: {
             RPN<Rational> rationalCalculator;
             rationalCalculator.run();
             break;
          }
-*/         default:
+         default:
             cout << "Wrong choice, please try again...\n" << endl;
       }
    } while(!exitMain);
