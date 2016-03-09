@@ -23,4 +23,4 @@ $ ./main.out
 ```
 ### Autor
 
-* [Adexe Sabina Pérez](alu0100769609.github.io)
+* [Adexe Sabina Pérez](http://alu0100769609.github.io)
