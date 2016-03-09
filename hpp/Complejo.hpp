@@ -2,29 +2,31 @@
 using namespace std;
 
 class Complejo {
-   friend class RPN<Complejo>;         //Allow class RPN to access method operator -
-public:
+   friend class RPN<Complejo>;               //Allow class RPN to access method operator -
+public:                       //Attributes
    double realPart;
    double imaginaryPart;
 
-public:
-   Complejo();
-   Complejo(double, double);
-   ~Complejo();
+public:                       //Default constructor & destructor
+   Complejo();                               //Default constructor
+   Complejo(double, double);                 //Overloaded constructor
+   ~Complejo();                              //Destructor
 
-public:
+public:                       //Public access methods
    void setRealPart(double);
    double getRealPart() const;
    void setImaginaryPart(double);
    double getImaginaryPart() const;
 
-private:
+private:                      //Methods that can't be called from outside the class
    Complejo operator +(const Complejo) const;
    Complejo operator -(const Complejo) const;
    Complejo operator *(const Complejo) const;
    Complejo operator /(const Complejo) const;
    Complejo operator -() const;
 };
+
+////////////////////////////Methods////////////////////////////
 
 Complejo::Complejo() {
    //By default
@@ -82,32 +84,32 @@ ostream& operator << (ostream& os, const Complejo& complejo) {
 }
 
 istream& operator >>(istream& is, Complejo& complejo) {
-   is >> ws;                     // eat up any leading white spaces (except eof by if)
-
-   int c = is.peek();            // peek character
+   is >> ws;                                 //Eat up any leading white spaces
+                                             //Start of parse input
+   int c = is.peek();                        //See next character
    if (c == '('){
-      char aux;
-      is >> aux;
-      c = is.peek();
-      if (isdigit(c)){
+      char discard;                          //Create discard variable
+      is >> discard;                         //Discard "("
+      c = is.peek();                         //See next char
+      if (isdigit(c)){                       //If isDigit save into realPart
          double num;
          is >> num;
          complejo.setRealPart(num);
-         c = is.peek();
+         c = is.peek();                      //See next char
          if (c == ','){
-            is >> aux;
-            c = is.peek();
-            if (isdigit(c)) {
+            is >> discard;                   //Discard ","
+            c = is.peek();                   //Get next char
+            if (isdigit(c)) {                //If isDigit save into imaginaryPart
                is >> num;
                complejo.setImaginaryPart(num);
-               c = is.peek();
+               c = is.peek();                //See next char
                if (c == ')') {
-                  is >> aux;
-                  return is;
+                  is >> discard;             //Discard ")"
+                  return is;                 //All successfully, return istream
                }
             }
          }
       }
-   }
+   }                                         //If here, complex input was wrong
    cout <<"Oops... Something is wrong here" << endl;
 }

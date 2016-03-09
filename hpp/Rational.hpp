@@ -2,23 +2,23 @@
 using namespace std;
 
 class Rational {
-   friend class RPN<Rational>;         //Allow class RPN to access method operator -
-public:
+   friend class RPN<Rational>;               //Allow class RPN to access method operator -
+public:                       //Attributes
    int numerator;
    int denominator;
 
-public:
-   Rational();
-   Rational(int, int);
-   ~Rational();
+public:                       //Default constructor & destructor
+   Rational();                               //Default constructor
+   Rational(int, int);                       //Overloaded constructor
+   ~Rational();                              //Destructor
 
-public:
+public:                       //Public access methods
    void setNumerator(int);
    int getNumerator() const;
    void setDenominator(int);
    int getDenominator() const;
 
-private:
+private:                      //Methods that can't be called from outside the class
    void gcd ();
    Rational operator +(const Rational) const;
    Rational operator -(const Rational) const;
@@ -26,6 +26,8 @@ private:
    Rational operator /(const Rational) const;
    Rational operator -() const;
 };
+
+////////////////////////////Methods////////////////////////////
 
 Rational::Rational() {
    //By default
@@ -102,32 +104,32 @@ ostream& operator << (ostream& os, const Rational& rational) {
 }
 
 istream& operator >>(istream& is, Rational& rational) {
-   is >> ws;                     // eat up any leading white spaces (except eof by if)
-
-   int c = is.peek();            // peek character
+   is >> ws;                                 //Eat up any leading white spaces
+                                             //Start of parse input
+   int c = is.peek();                        //See next character
    if (c == '{'){
-      char aux;
-      is >> aux;
-      c = is.peek();
-      if (isdigit(c)){
+      char discard;                          //Create discard variable
+      is >> discard;                         //Discard "("
+      c = is.peek();                         //See next char
+      if (isdigit(c)){                       //If isDigit save into realPart
          double num;
          is >> num;
          rational.setNumerator(num);
-         c = is.peek();
+         c = is.peek();                      //See next char
          if (c == '/'){
-            is >> aux;
-            c = is.peek();
-            if (isdigit(c)) {
+            is >> discard;                   //Discard "/"
+            c = is.peek();                   //Get next char
+            if (isdigit(c)) {                //If isDigit save into imaginaryPart
                is >> num;
                rational.setDenominator(num);
-               c = is.peek();
+               c = is.peek();                //See next char
                if (c == '}') {
-                  is >> aux;
-                  return is;
+                  is >> discard;             //Discard ")"
+                  return is;                 //All successfully, return istream
                }
             }
          }
       }
-   }
+   }                                         //If here, complex input was wrong
    cout <<"Oops... Something is wrong here" << endl;
 }
