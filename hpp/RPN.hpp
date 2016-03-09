@@ -134,10 +134,19 @@ void RPN<TDATO>::run(void) {
       else if (isdigit(c) || c == '('){
          TDATO item;
          cin >> item;
+//         cout << "Esto hay en item: " << item << endl;
 //         cout << "El item es: " << item << endl;
 //         cout << "Real de item: " << item.getRealPart() << endl;
 //         cout << "Imag de item: " << item.getImaginaryPart() << endl;
          pushItem(stack, item);
+
+//         cout << "Esto hay en la pila" << endl;
+//         printItems(stack);
+//         cout << "Sacamos el item" << endl;
+//         popItem(stack);
+//         cout << "Lo nuevo de la pila" << endl;
+//         printItems(stack);
+//         cout << "por aqui no pasa" << endl;
       }
       else {
          char op;

@@ -26,21 +26,21 @@ int main(void) {
             exitMain = true;
             break;
          case 1: {
-            RPN<int>* intCalculator = new RPN<int>();
+            RPN<int>* intCalculator = new RPN<int>;
             intCalculator->run();
             break;
          }
          case 2: {
-            RPN<float>* floatCalculator = new RPN<float>();
+            RPN<float>* floatCalculator = new RPN<float>;
             floatCalculator->run();
             break;
          }
-/*         case 3: {
-            RPN<Complejo>* complexCalculator = new RPN<Complejo>();
+         case 3: {
+            RPN<Complejo>* complexCalculator = new RPN<Complejo>;
             complexCalculator->run();
             break;
          }
-*/         default:
+         default:
             cout << "Wrong choice, please try again...\n" << endl;
       }
    } while(!exitMain);

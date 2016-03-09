@@ -16,12 +16,14 @@ public:
 
 public:
    void setRealPart(double);
-   double getRealPart();
+   double getRealPart() const;
    void setImaginaryPart(double);
-   double getImaginaryPart();
-   Complejo& operator +(Complejo&);
-   Complejo& operator -(Complejo&);
-//   Complejo& operator -();
+   double getImaginaryPart() const;
+   Complejo& operator +(const Complejo&) const;
+   Complejo& operator -(const Complejo&) const;
+   Complejo& operator *(const Complejo&) const {};
+   Complejo& operator /(const Complejo&) const {};
+   Complejo& operator -() const;
 //   ostream& operator <<(ostream&,Complejo&);
 //   istream& operator >>(istream&,istream&);
 };
@@ -43,7 +45,7 @@ void Complejo::setRealPart(double realPart) {
    this->realPart = realPart;
 }
 
-double Complejo::getRealPart() {
+double Complejo::getRealPart() const {
    return realPart;
 }
 
@@ -52,20 +54,24 @@ void Complejo::setImaginaryPart(double imaginaryPart) {
 
 }
 
-double Complejo::getImaginaryPart() {
+double Complejo::getImaginaryPart() const {
    return imaginaryPart;
 }
 
-Complejo& Complejo::operator +(Complejo& c2) {
+Complejo& Complejo::operator +(const Complejo& c2) const {
    return* (new Complejo(getRealPart() + c2.getRealPart(), getImaginaryPart() + c2.getImaginaryPart()));
 }
 
-Complejo& Complejo::operator -(Complejo& c2){
+Complejo& Complejo::operator -(const Complejo& c2) const {
    return* (new Complejo(getRealPart() - c2.getRealPart(), getImaginaryPart() - c2.getImaginaryPart()));
 }
 
-ostream& operator << (ostream& os, Complejo& complejo) {
-   os << "(" << complejo.getRealPart() << "+" << complejo.getImaginaryPart() << "i)";
+Complejo& Complejo::operator -() const {
+   return* (new Complejo(-getRealPart(), -getImaginaryPart()));
+}
+
+ostream& operator << (ostream& os, const Complejo& complejo) {
+   os << "(" << complejo.getRealPart() << "," << complejo.getImaginaryPart() << ")";
    return os;
 }
 
