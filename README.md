@@ -15,11 +15,29 @@ Además de los tipos básicos del lenguaje (int, float), la calculadora debe fun
 El objetivo de esta práctica es trabajar la definición de clases, la implementación de operaciones mediante métodos, uso de funciones amigas y la sobrecarga de operadores. También se introduce las plantillas para definir clases genéricas.
 
 ### Forma de uso
+#### Compilación
 ```bash
 $ g++ main/main.cpp -o main.out
 ```
 ```bash
 $ ./main.out
+```
+#### Ejecución
+* Para el ejemplo usando **int**: (3 + 2) * (5 - 7)
+```
+ 3 2 + 5 7 - *
+```
+* Para el ejemplo usando **float**: (3.2 + 2.4) * (5 - 7.1)
+```
+ 3.2 2.4 + 5 7.1 - *
+```
+* Para el ejemplo usando **complejo**: (3+2i + 2+4i) - (5+2i - 7+1i)
+```
+ (3,2) (2,4) + (5,2) (7,1) - -
+```
+* Para el ejemplo usando **racional**: (3/2 + 2/4) * (7/1 - 5/1)
+```
+ {3/2} {2/4} + {7/1} {5/1} - *
 ```
 ### Autor
 
