@@ -69,15 +69,17 @@ void Rational::gcd () {
 }
 
 Rational Rational::operator +(const Rational r2) const {
-   Rational result = (Rational((getNumerator() * r2.getDenominator()) + (r2.getNumerator() * getDenominator()),
-                     getDenominator() * r2.getDenominator()));
+   Rational result = (Rational((getNumerator() * r2.getDenominator()) +
+                               (r2.getNumerator() * getDenominator()),
+                              getDenominator() * r2.getDenominator()));
    result.gcd();
    return result;
 }
 
 Rational Rational::operator -(const Rational r2) const {
-   Rational result = (Rational((getNumerator() * r2.getDenominator()) - (r2.getNumerator() * getDenominator()),
-                     getDenominator() * r2.getDenominator()));
+   Rational result = (Rational((getNumerator() * r2.getDenominator()) -
+                               (r2.getNumerator() * getDenominator()),
+                              getDenominator() * r2.getDenominator()));
    result.gcd();
    return result;
 }
@@ -87,13 +89,15 @@ Rational Rational::operator -() const {
 }
 
 Rational Rational::operator *(const Rational r2) const {
-   Rational result = (Rational(getNumerator() * r2.getNumerator(), getDenominator() * r2.getDenominator()));
+   Rational result = (Rational(getNumerator() * r2.getNumerator(),
+                              getDenominator() * r2.getDenominator()));
    result.gcd();
    return result;
 }
 
 Rational Rational::operator /(const Rational r2) const {
-   Rational result = (Rational(getNumerator() * r2.getDenominator(), getDenominator() * r2.getNumerator()));
+   Rational result = (Rational(getNumerator() * r2.getDenominator(),
+                              getDenominator() * r2.getNumerator()));
    result.gcd();
    return result;
 }
@@ -111,7 +115,7 @@ istream& operator >>(istream& is, Rational& rational) {
       char discard;                          //Create discard variable
       is >> discard;                         //Discard "("
       c = is.peek();                         //See next char
-      if (isdigit(c)){                       //If isDigit save into realPart
+      if (isdigit(c)){                       //If isDigit save into numerator
          double num;
          is >> num;
          rational.setNumerator(num);
@@ -119,7 +123,7 @@ istream& operator >>(istream& is, Rational& rational) {
          if (c == '/'){
             is >> discard;                   //Discard "/"
             c = is.peek();                   //Get next char
-            if (isdigit(c)) {                //If isDigit save into imaginaryPart
+            if (isdigit(c)) {                //If isDigit save into denominator
                is >> num;
                rational.setDenominator(num);
                c = is.peek();                //See next char
@@ -130,6 +134,6 @@ istream& operator >>(istream& is, Rational& rational) {
             }
          }
       }
-   }                                         //If here, complex input was wrong
+   }                                         //If here, rational input was wrong
    cout <<"Oops... Something is wrong here" << endl;
 }
